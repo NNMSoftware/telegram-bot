@@ -12,6 +12,7 @@
         <module>telegram-core</module>
         <module>encounter-api</module>
         <module>encounter-bot</module>
+        <module>browser-request</module>
     </modules>
 
     <repositories>
