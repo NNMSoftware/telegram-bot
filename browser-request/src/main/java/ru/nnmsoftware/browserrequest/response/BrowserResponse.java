@@ -12,6 +12,13 @@ import java.util.List;
  */
 public class BrowserResponse implements Response {
 
+    private int statusCode;
+    private String message;
+    private String contentType;
+    private List<NameValuePair> headers;
+    private List<HttpCookie> cookies;
+    private InputStream body;
+
     public BrowserResponse(
             int statusCode,
             String message,
@@ -19,36 +26,43 @@ public class BrowserResponse implements Response {
             List<NameValuePair> headers,
             List<HttpCookie> cookies,
             InputStream body) {
-
+        this.statusCode = statusCode;
+        this.message = message;
+        this.contentType = contentType;
+        this.headers = headers;
+        this.cookies = cookies;
+        this.body = body;
     }
 
     @Override
     public int getStatus() {
-        return 0;
+        return statusCode;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return message;
     }
 
     @Override
     public String getBody() {
+        // // TODO: 02.09.16 implementation 
         return null;
     }
 
     @Override
     public List<NameValuePair> getHeaders() {
-        return null;
+        return headers;
     }
 
     @Override
     public List<HttpCookie> getCookies() {
-        return null;
+        return cookies;
     }
 
     @Override
     public <T> T getBodyAs(Converter<T> converter) {
+        // // TODO: 02.09.16 implementation
         return null;
     }
 }
