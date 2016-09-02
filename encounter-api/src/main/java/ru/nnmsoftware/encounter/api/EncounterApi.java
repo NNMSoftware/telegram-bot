@@ -9,6 +9,12 @@ import ru.nnmsoftware.encounter.beans.LevelInfo;
  */
 public class EncounterApi {
 
+    private String hostname;
+
+    public EncounterApi(String hostname) {
+        this.hostname = hostname;
+    }
+
     @Nullable
     public String login(String login, String password) {
         // TODO: 02.09.16 implementation
