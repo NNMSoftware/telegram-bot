@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by stille on 30.08.16.
+ * Интерфейс для представления ответов http(s)-сервисов
  */
 public interface Response {
 

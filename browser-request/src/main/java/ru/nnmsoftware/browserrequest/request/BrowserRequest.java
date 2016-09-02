@@ -15,6 +15,7 @@ import static java.util.Arrays.asList;
 
 /**
  * Created by stille on 30.08.16.
+ * Класс для задания, хранения и представления http-запросов с браузерной спецификой
  */
 public class BrowserRequest implements Request {
 

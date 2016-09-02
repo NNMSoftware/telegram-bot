@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by stille on 02.09.16.
+ * Класс, представляющий ответ в "браузерной" специфике — с куками, заголовками, etc.
  */
 public class BrowserResponse implements Response {
 

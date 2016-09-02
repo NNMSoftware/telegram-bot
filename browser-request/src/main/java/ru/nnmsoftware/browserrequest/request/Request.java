@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by stille on 30.08.16.
+ * Интерфейс объектов для хранения и составления http(s)-запросов
  */
 public interface Request {
 

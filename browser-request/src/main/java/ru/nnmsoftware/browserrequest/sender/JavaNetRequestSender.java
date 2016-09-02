@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * Created by stille on 02.09.16.
+ * Класс-отправитель http(s)-запросов, построенный на основе библиотеки java.net
  */
 public class JavaNetRequestSender implements RequestSender {
 

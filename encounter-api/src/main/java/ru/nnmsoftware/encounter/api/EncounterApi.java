@@ -1,12 +1,15 @@
 package ru.nnmsoftware.encounter.api;
 
+import com.sun.istack.internal.Nullable;
 import ru.nnmsoftware.encounter.beans.LevelInfo;
 
 /**
  * Created by stille on 02.09.16.
+ * Основное API encounter-движка
  */
 public class EncounterApi {
 
+    @Nullable
     public String login(String login, String password) {
         // TODO: 02.09.16 implementation
         return null;

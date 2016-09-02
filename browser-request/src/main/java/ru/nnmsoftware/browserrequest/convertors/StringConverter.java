@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 
 /**
  * Created by stille on 02.09.16.
+ * Преобразователь потока в строковое представление
  */
 public class StringConverter implements Converter<String> {
 

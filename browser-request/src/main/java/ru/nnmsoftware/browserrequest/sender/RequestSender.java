@@ -5,6 +5,7 @@ import ru.nnmsoftware.browserrequest.response.Response;
 
 /**
  * Created by stille on 30.08.16.
+ * Интерфейс отправителя http(s)-запросов
  */
 public interface RequestSender {
 
