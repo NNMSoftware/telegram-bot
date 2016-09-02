@@ -3,6 +3,7 @@ package ru.nnmsoftware.browserrequest.response;
 import org.apache.http.NameValuePair;
 import ru.nnmsoftware.browserrequest.convertors.Converter;
 
+import java.net.HttpCookie;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public interface Response {
     String getBody();
 
     List<NameValuePair> getHeaders();
+
+    List<HttpCookie> getCookies();
 
     <T> T getBodyAs(Converter<T> converter);
 
