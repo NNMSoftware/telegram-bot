@@ -43,6 +43,11 @@ public class BrowserResponse implements Response {
     }
 
     @Override
+    public List<HttpCookie> getCookies() {
+        return null;
+    }
+
+    @Override
     public <T> T getBodyAs(Converter<T> converter) {
         return null;
     }
