@@ -1,10 +1,13 @@
 package ru.nnmsoftware.browserrequest.response;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.entity.ContentType;
 import ru.nnmsoftware.browserrequest.convertors.Converter;
+import ru.nnmsoftware.browserrequest.convertors.StringConverter;
 
 import java.io.InputStream;
 import java.net.HttpCookie;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -46,8 +49,7 @@ public class BrowserResponse implements Response {
 
     @Override
     public String getBody() {
-        // // TODO: 02.09.16 implementation 
-        return null;
+        return getBodyAs(new StringConverter());
     }
 
     @Override
@@ -62,7 +64,10 @@ public class BrowserResponse implements Response {
 
     @Override
     public <T> T getBodyAs(Converter<T> converter) {
-        // // TODO: 02.09.16 implementation
-        return null;
+        return converter.convert(body, getCharset());
+    }
+
+    private Charset getCharset() {
+        return ContentType.parse(contentType).getCharset();
     }
 }
