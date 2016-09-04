@@ -127,7 +127,7 @@ public class JavaNetRequestSender implements RequestSender {
         List<NameValuePair> getHeaders() {
             List<NameValuePair> headers = new LinkedList<>();
             conn.getHeaderFields().entrySet().stream()
-                    .filter(entry -> entry != null)
+                    .filter(entry -> entry != null && entry.getKey() != null)
                     .forEach(entry -> headers.addAll(entry.getValue().stream()
                                 .map(values -> new BasicNameValuePair(entry.getKey(), values))
                                 .collect(Collectors.toList()))

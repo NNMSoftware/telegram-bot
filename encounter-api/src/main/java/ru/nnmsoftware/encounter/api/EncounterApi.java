@@ -10,7 +10,6 @@ import ru.nnmsoftware.encounter.beans.LevelInfo;
 import ru.nnmsoftware.encounter.utils.CookieBox;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * Created by stille on 02.09.16.
@@ -26,14 +25,15 @@ public class EncounterApi {
 
     private URI baseURI;
 
-    public EncounterApi(String hostname) throws URISyntaxException {
-        this.baseURI = new URI(hostname);
+    public EncounterApi(URI baseURI) {
+        this.baseURI = baseURI;
     }
 
     @Nullable
     public String login(String login, String password) {
         BrowserRequest request = basicRequest()
-                .withPath("/Login.aspx?return=%2f")
+                .withPath("/Login.aspx")
+                .setQueryParameter("return", "%2f")
                 .withFormUrlEncodedBody(
                         new BasicNameValuePair("login", login),
                         new BasicNameValuePair("password", password)
