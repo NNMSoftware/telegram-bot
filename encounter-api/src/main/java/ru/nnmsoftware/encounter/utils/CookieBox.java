@@ -5,6 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.net.HttpCookie;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ public class CookieBox {
 
     private static CookieBox instanceKeeper;
 
-    private Map<String, HttpCookie> storage = new HashMap<String, HttpCookie>();
+    private Map<String, List<HttpCookie>> storage = new HashMap<String, List<HttpCookie>>();
 
     private CookieBox() {
         // singleton
@@ -33,7 +34,7 @@ public class CookieBox {
      * @param cookie кука
      * @return токен для получения куки из хранилища
      */
-    public String register(HttpCookie cookie) {
+    public String register(List<HttpCookie> cookie) {
         String id = DigestUtils.md5Hex(cookie.toString() + new Date().toString());
         storage.put(id, cookie);
         return id;
@@ -57,7 +58,7 @@ public class CookieBox {
      * @param id токен для доступа к куке
      * @return кука
      */
-    public HttpCookie get(String id) {
+    public List<HttpCookie> get(String id) {
         return storage.get(id);
     }
 
