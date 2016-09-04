@@ -18,7 +18,7 @@ import java.net.URI;
 public class EncounterApi {
 
     private static final String USER_AGENT =
-            "Mozilla/5.0 (Linux; U; Android 2.3; en-us) AppleWebKit/999+ (KHTML, like Gecko) Safari/999.9";
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36";
 
     private static RequestSender sender = new JavaNetRequestSender();
     private static CookieBox cookieBox = CookieBox.getInstance();
