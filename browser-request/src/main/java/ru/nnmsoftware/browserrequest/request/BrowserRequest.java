@@ -1,12 +1,16 @@
 package ru.nnmsoftware.browserrequest.request;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
+import java.io.UnsupportedEncodingException;
 import java.net.HttpCookie;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -47,12 +51,8 @@ public class BrowserRequest implements Request {
         });
     }
 
-    public BrowserRequest addQueryParameters(String parameterName, String parameterValue) {
+    public BrowserRequest addQueryParameter(String parameterName, String parameterValue) {
         return addQueryParameter(parameterName, asList(parameterValue));
-    }
-
-    public BrowserRequest addQueryParameters(String parameterName, String... parameterValues) {
-        return addQueryParameter(parameterName, asList(parameterValues));
     }
 
     public BrowserRequest withScheme(String scheme) {
@@ -77,6 +77,49 @@ public class BrowserRequest implements Request {
 
     public BrowserRequest withFragment(String fragment) {
         return copyAndModify(request -> request.uriBuilder.setFragment(fragment));
+    }
+
+    public BrowserRequest withCookies(List<HttpCookie> cookies) {
+        return copyAndModify(request -> request.cookies = cookies);
+    }
+
+    public BrowserRequest addCookies(List<HttpCookie> cookies) {
+        return copyAndModify(request -> request.cookies.addAll(cookies));
+    }
+
+    public BrowserRequest withHeaders(List<NameValuePair> headers) {
+        return copyAndModify(request -> request.headers = headers);
+    }
+
+    public BrowserRequest addHeaders(List<NameValuePair> headers) {
+        return copyAndModify(request -> request.headers.addAll(headers));
+    }
+
+    public BrowserRequest addHeader(String name, String value) {
+        return copyAndModify(request -> request.headers.add(new BasicNameValuePair(name, value)));
+    }
+
+    public BrowserRequest withMethod(Method method) {
+        return copyAndModify(request -> request.method = method);
+    }
+
+    public BrowserRequest withBody(byte[] body) {
+        return copyAndModify(request -> request.body = body);
+    }
+
+    public BrowserRequest withFormUrlEncodedBody(NameValuePair ... nameValuePairs) {
+        String body = StringUtils.join(
+                asList(nameValuePairs).stream()
+                        .map(pair -> {
+                            try {
+                                return pair.getName() + "=" + URLEncoder.encode(pair.getValue(), "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                throw new RuntimeException("Кодировка UTF-8 больше не существует. :)");
+                            }
+                        })
+                        .toArray()
+                , "&");
+        return copyAndModify(request -> request.body = body.getBytes());
     }
 
     @Override
@@ -120,7 +163,12 @@ public class BrowserRequest implements Request {
 
     @Override
     public BrowserRequest clone() {
-        return new BrowserRequest(cloneUriBuilder());
+        BrowserRequest clone = new BrowserRequest(cloneUriBuilder());
+        clone.body = this.body;
+        clone.cookies.addAll(this.cookies);
+        clone.headers.addAll(this.headers);
+        clone.method = this.method;
+        return clone;
     }
 
     private BrowserRequest copyAndModify(Consumer<BrowserRequest> modifier) {
