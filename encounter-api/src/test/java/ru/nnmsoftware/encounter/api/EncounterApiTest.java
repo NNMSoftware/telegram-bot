@@ -22,7 +22,6 @@ public class EncounterApiTest {
 
     @Test
     public void testLogin() throws Exception {
-        String token = api.login("stille", "nerhg4ygahg");
     }
 
     @Test
