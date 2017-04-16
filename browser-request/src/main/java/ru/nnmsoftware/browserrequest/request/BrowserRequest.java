@@ -1,5 +1,6 @@
 package ru.nnmsoftware.browserrequest.request;
 
+import com.sun.istack.internal.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.http.NameValuePair;
@@ -73,6 +74,17 @@ public class BrowserRequest implements Request {
 
     public BrowserRequest withPath(String path) {
         return copyAndModify(request -> request.uriBuilder.setPath(path));
+    }
+
+    public BrowserRequest appendPath(@NotNull String pathSection) {
+        if (StringUtils.isEmpty(pathSection)) {
+            return this;
+        }
+        String actualPath = this.uriBuilder.getPath();
+        final String newPath =
+                (actualPath.endsWith("/") ? actualPath : actualPath + "/") +
+                        (pathSection.startsWith("/") ? pathSection.substring(1) : pathSection);
+        return copyAndModify(request -> request.uriBuilder.setPath(newPath));
     }
 
     public BrowserRequest withFragment(String fragment) {

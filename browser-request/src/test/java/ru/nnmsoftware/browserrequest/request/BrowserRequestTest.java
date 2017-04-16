@@ -206,4 +206,16 @@ public class BrowserRequestTest {
         assertThat(clone.getBody(), equalTo(body));
         assertThat(clone.getMethod(), equalTo(method));
     }
+
+    @Test
+    public void testAppendingPath() throws Exception {
+        BrowserRequest request = new BrowserRequest(new URI("http", "host.domain", "/path", null));
+        assertThat(request.appendPath("section").asLink(), equalTo("http://host.domain/path/section"));
+    }
+
+    @Test
+    public void testAppendingPathWithSlash() throws Exception {
+        BrowserRequest request = new BrowserRequest(new URI("http", "host.domain", "/path", null));
+        assertThat(request.appendPath("/section").asLink(), equalTo("http://host.domain/path/section"));
+    }
 }
